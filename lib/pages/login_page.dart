@@ -1,3 +1,4 @@
+import 'package:dio_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -107,7 +108,12 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () => {print(email), print(senha)},
+                      onPressed: () => {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => HomePage())
+                        )
+                      },
                       child: Text(
                         "Entrar",
                         style: TextStyle(color: Colors.white),
