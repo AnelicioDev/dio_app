@@ -1,3 +1,6 @@
+import 'package:dio_app/pages/dados_cadastrais.dart';
+import 'package:dio_app/pages/page1.dart';
+import 'package:dio_app/pages/testes_widgests.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +21,27 @@ class _HomePageState extends State<HomePage> {
         title: Text("Home Page"),
         backgroundColor: Colors.blueAccent,
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(child: Text('Menu')),
+            ListTile(
+              title: Text('Dados cadastráis'),
+              onTap:
+                  () => {
+                    Navigator.pop(context), //esconde a drawer depois de clicado
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DadosCadastrais(),
+                      ),
+                    ),
+                  },
+            ),
+            ListTile(title: Text('Configurações')),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -29,32 +53,20 @@ class _HomePageState extends State<HomePage> {
                       posicaoPagina = val;
                     }),
                   },
-              scrollDirection: Axis.vertical,
               children: [
-                Container(color: Colors.amber),
-                Container(color: Colors.blueAccent),
-                Container(color: Colors.red),
+                Page1(), 
+                TestesWidgests(),
               ],
             ),
           ),
           BottomNavigationBar(
-            onTap: (val)=>{
-              controller.jumpToPage(val)
+            onTap: (value) => {
+              controller.jumpToPage(value)
             },
             currentIndex: posicaoPagina,
             items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.access_alarm),
-                label: "Time",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_box_outlined),
-                label: "Perfil",
-              ),
+              BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+              BottomNavigationBarItem(label: "Home", icon: Icon(Icons.add)),
             ],
           ),
         ],
